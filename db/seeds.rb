@@ -7,5 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 items = Item.create([
-  {amount: '500g', name: 'scallops', description: 'tasty goodness'}
+  {amount: '500g', name: 'scallops', description: 'tasty goodness'},
+  {amount: ''}
   ])
