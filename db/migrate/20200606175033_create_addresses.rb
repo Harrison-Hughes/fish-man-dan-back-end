@@ -5,7 +5,7 @@ class CreateAddresses < ActiveRecord::Migration[6.0]
       t.string :line_two
       t.string :town_city
       t.string :county
-      t.string :phone_number
+      t.string :contact_number
       t.string :extra_info
 
       t.timestamps
