@@ -8,5 +8,12 @@
 
 items = Item.create([
   {amount: '500g', name: 'scallops', description: 'tasty goodness'},
-  {amount: ''}
+  {amount: '500g', name: 'scallops', description: 'tasty goodness'},
+  {amount: '400g', name: 'scallops', description: 'tasty goodness'}
   ])
+
+users = User.create([
+  {email: 'hh378@exeter.ac.uk', full_name: 'Harrison Hughes (student)', password_digest: '0000'},
+  {email: 'harr.hughes@gmail.com', full_name: 'Harrison Hughes (work)', password_digest: '0001'}
+])
+
