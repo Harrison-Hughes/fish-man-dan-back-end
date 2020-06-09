@@ -2,18 +2,15 @@ class UsersController < ApplicationController
 
   def create
     user = User.create(user_params)
-
     if user.valid?
       render json: user
     else
       render json: {message: user.errors.full_messages[0]}, status: :not_acceptable
     end 
-
   end
 
   def login
     user = User.find_by(email: user_params[:email])
-
     if user && user.authenticate(user_params[:password])
       render json: user
     else

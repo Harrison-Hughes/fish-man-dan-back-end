@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  
   before_action :set_current_user
 
     def issue_token(payload)
