@@ -32,4 +32,12 @@ class ApplicationController < ActionController::API
       !!@current_user
     end
 
+    def require_login
+      render json: {message: "You need to be logged in to see this page"}, status: :unauthorized if !logged_in?
+    end
+  
+    def require_admin
+      render json: {message: "You need to have admin access to perform this action."}, status: :unauthorized if !@current_user.admin
+    end
+
 end

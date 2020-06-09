@@ -7,6 +7,7 @@ class CreateAddresses < ActiveRecord::Migration[6.0]
       t.string :county
       t.string :contact_number
       t.string :extra_info
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end

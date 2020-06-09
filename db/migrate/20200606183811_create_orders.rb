@@ -4,6 +4,7 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.string :status
       t.string :reason_for_decline
       t.references :user, null: false, foreign_key: true
+      t.references :address, null: false, foreign_key: true
 
       t.timestamps
     end

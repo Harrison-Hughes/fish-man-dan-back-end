@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
   def token
-    JWT.encode({user_id: self.id}, ENV["CODER"])
+    JWT.encode({user_id: self.id}, ENV["FISH_MAN_DAN"])
   end
 
 end
