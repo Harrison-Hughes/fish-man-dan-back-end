@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     if user && user.authenticate(user_params[:password])
       render json: user
     else
-      render json: {message: "We couldn't find a user with that email and password!"}, status: :not_acceptable
+      render json: {message: "No user with that email and password"}, status: :not_acceptable
     end
   end
 
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     if logged_in?
       render json: @current_user
     else
-      render json: {message: "You done somethin wrong boy!"}, status: :unauthorized
+      render json: {message: "No validation present"}, status: :unauthorized
     end 
   end
 

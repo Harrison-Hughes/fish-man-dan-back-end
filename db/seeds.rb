@@ -12,5 +12,5 @@ items = Item.create([
 
 users = User.create([
   {email: 'hh378@exeter.ac.uk', full_name: 'Harrison Hughes (student)', password: '0000', password_confirmation: '0000', is_admin: false},
-  {email: 'harr.hughes@gmail.com', full_name: 'Harrison Hughes (work)', password: '0001', password_confirmation: '0001', is_admin: true}
-])e
+  {email: 'harr.hughes@gmail.com', full_name: 'Harrison Hughes (work)', password: '0001', password_confirmation: '0001', is_admin: true} # eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.rXOh2dSBtTDo41suF8Z8t5Q3vudwnCUBGjVTO_tpAxA
+])

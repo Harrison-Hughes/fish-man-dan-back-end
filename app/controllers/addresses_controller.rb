@@ -12,6 +12,9 @@ class AddressesController < ApplicationController
     end
   end
 
+  def update
+    
+
   private
 
   def address_params
