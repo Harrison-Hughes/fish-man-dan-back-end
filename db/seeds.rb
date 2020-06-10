@@ -7,12 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 items = Item.create([
-  {amount: '500g', name: 'scallops1', description: 'Scallop is a common name that is primarily applied to any one of numerous species of saltwater clams or marine bivalve mollusks in the taxonomic family Pectinidae, the scallops'},
-  {amount: '500g', name: 'scallops2', description: 'Scallop is a common name that is primarily applied to any one of numerous species of saltwater clams or marine bivalve mollusks in the taxonomic family Pectinidae, the scallops'},
-  {amount: '400g', name: 'scallops3', description: 'Scallop is a common name that is primarily applied to any one of numerous species of saltwater clams or marine bivalve mollusks in the taxonomic family Pectinidae, the scallops'}
-  ])
+  {name: 'scallops', description: 'Scallop is a common name that is primarily applied to any one of numerous species of saltwater clams or marine bivalve mollusks in the taxonomic family Pectinidae, the scallops'},
+   ])
 
 users = User.create([
-  {email: 'hh378@exeter.ac.uk', full_name: 'Harrison Hughes (student)', password: '0000', password_confirmation: '0000'},
-  {email: 'harr.hughes@gmail.com', full_name: 'Harrison Hughes (work)', password: '0001', password_confirmation: '0001'}
-])
+  {email: 'hh378@exeter.ac.uk', full_name: 'Harrison Hughes (student)', password: '0000', password_confirmation: '0000', is_admin: false},
+  {email: 'harr.hughes@gmail.com', full_name: 'Harrison Hughes (work)', password: '0001', password_confirmation: '0001', is_admin: true}
+])e

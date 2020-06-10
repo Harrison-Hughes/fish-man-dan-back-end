@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
 
   before_action :require_login
 
-  def placeOrder
+  def create
     address = Address.find_by(id: address_id[:address_id])
     order = Order.new(status: 'pending confirmation', user: @current_user, address: address)
     order.items = JSON.parse(address_id[:item_ids]).map{ |id| Item.find_by(id: id)}

@@ -12,9 +12,6 @@ class AddressesController < ApplicationController
     end
   end
 
-  def delete
-    
-
   private
 
   def address_params

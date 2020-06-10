@@ -38,7 +38,7 @@ class ApplicationController < ActionController::API
     end
   
     def require_admin
-      render json: {message: "You need to have admin access to perform this action."}, status: :unauthorized if !@current_user.admin
+      render json: {message: "You need to have admin access to perform this action."}, status: :unauthorized if !@current_user.is_admin
     end
 
 end
