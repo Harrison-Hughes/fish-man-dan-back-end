@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 202006061203812) do
     t.string "line_two"
     t.string "town_city"
     t.string "county"
+    t.string "postcode"
     t.string "contact_number"
     t.string "extra_info"
     t.bigint "user_id", null: false
@@ -32,11 +33,6 @@ ActiveRecord::Schema.define(version: 202006061203812) do
     t.string "name"
     t.string "description"
     t.string "valid_until"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "order_addresses", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -55,12 +51,8 @@ ActiveRecord::Schema.define(version: 202006061203812) do
   create_table "requests", force: :cascade do |t|
     t.string "amount"
     t.string "note"
-    t.bigint "order_id", null: false
-    t.bigint "item_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["item_id"], name: "index_requests_on_item_id"
-    t.index ["order_id"], name: "index_requests_on_order_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -75,6 +67,4 @@ ActiveRecord::Schema.define(version: 202006061203812) do
   add_foreign_key "addresses", "users"
   add_foreign_key "orders", "addresses"
   add_foreign_key "orders", "users"
-  add_foreign_key "requests", "items"
-  add_foreign_key "requests", "orders"
 end
