@@ -20,16 +20,16 @@ class AddressesController < ApplicationController
   end
 
   def update
-    address = Address.find_by(id: address_params[:id])
-    if address.update(address_params)
-      render json: address 
+    address = Address.find_by(id: params[:id])
+    if address.update(address_params) && address.user == @current_user
+      render json: address
     else 
       render json: { error: "could not update address" }, status: :not_acceptable
     end
   end
 
   def destroy
-    address = Address.find_by(id: address_params[:id])
+    address = Address.find_by(id: params[:id])
     if address.destroy
       render json: { success: "address destroyed"}
     else

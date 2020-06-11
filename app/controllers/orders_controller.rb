@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
     else 
       render json: { error: "could not place order" }, status: :not_acceptable
     end
-
   end
 
   private

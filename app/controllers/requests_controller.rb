@@ -1,6 +1,2 @@
-class RequestsController < ApplicationController
-
-  before_action :require_login
-
-  
+class RequestsController < ApplicationController  
 end

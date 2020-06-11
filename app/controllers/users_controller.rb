@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def create
-    user = User.create(user_params)
+    user = User.create(user_params, is_admin: false)
     if user.valid?
       render json: user
     else
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     if logged_in?
       render json: @current_user
     else
-      render json: {message: "No validation present"}, status: :unauthorized
+      render json: {message: "No user logged in"}, status: :unauthorized
     end 
   end
 
