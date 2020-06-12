@@ -31,7 +31,6 @@ class AddressesController < ApplicationController
   def destroy
     address = Address.find_by(id: params[:id])
     if address.destroy
-      console.log("ADDRESS DESTROY SUCCESS")
       render json: { success: "address destroyed"}
     else
       render json: { error: "could not destroy address" }, status: :not_acceptable
