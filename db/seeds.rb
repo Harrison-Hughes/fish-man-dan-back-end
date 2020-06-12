@@ -14,3 +14,8 @@ users = User.create([
   {email: 'harr.hughes@gmail.com', full_name: 'Harrison Hughes (work)', password: '000001', password_confirmation: '000001', is_admin: true}, # eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyfQ.rXOh2dSBtTDo41suF8Z8t5Q3vudwnCUBGjVTO_tpAxA
   {email: 'hh378@exeter.ac.uk', full_name: 'Harrison Hughes (student)', password: '000002', password_confirmation: '000002', is_admin: false}
 ])
+
+address1 = Address.create({line_one: "6 Mayflower Close", line_two: "", town_city: "Lymington", county: "Hampshire", postcode: "SO41 3SN", contact_number: "01590670311", extra_info: ""})
+address2 = Address.create({line_one: "7 Mayflower Close", line_two: "", town_city: "Lymington", county: "Hampshire", postcode: "SO41 3SN", contact_number: "07794341674", extra_info: ""})
+address1.update(user: users[0])
+address2.update(user: users[1])
