@@ -1,2 +1,3 @@
-class RequestsController < ApplicationController  
+class RequestsController < ApplicationController
+  
 end

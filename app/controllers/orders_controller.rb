@@ -8,16 +8,17 @@ class OrdersController < ApplicationController
   end
 
   def create
+    
     address = Address.find_by(id: order_params[:address_id])
     request_objects = JSON.parse(order_params[:request_objects]) # request objects => [{item_id: ~, amount: ~, note: ~}, ...]
     order = Order.new(status: 'pending confirmation', user: @current_user, address: address)
-    if order.save
-      items
-      # create requests
-      if request_objects.map{ |r| Request.create(order: order, item: find_item_by_id(r[:id]), amount: r[:amount], note: r[:note])}
+
+    if order.save 
+      if !Request.make_requests(order, request_objects).any? { |r| r.nil? }
         render json: order
       else 
-        render json: { error: "could not place order" }, status: :not_acceptable
+        order.destroy
+        render json: { error: "could not make requests" }, status: :not_acceptable
       end
     else 
       render json: { error: "could not place order" }, status: :not_acceptable
@@ -25,10 +26,19 @@ class OrdersController < ApplicationController
   end
 
   def update
+    address = Address.find_by(id: order_params[:address_id])
+    request_objects = JSON.parse(order_params[:request_objects]) # request objects => [{item_id: ~, amount: ~, note: ~}, ...]
+
     order = Order.find_by(id: params[:id])
+    order.assign_attributes(status: order_params[:status], user: @current_user, address: address)
 
     if order.save
-      render json: order
+      if !Request.make_requests(order, request_objects).any? { |r| r.nil? }
+        render json: order
+      else 
+        order.destroy
+        render json: { error: "could not make requests" }, status: :not_acceptable
+      end
     else 
       render json: { error: "could not update order" }, status: :not_acceptable
     end
@@ -46,7 +56,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:request_objects, :address_id)
+    params.require(:order).permit(:request_objects, :address_id, :note_from_buyer, :status)
   end
 
   def find_item_by_id(id)
