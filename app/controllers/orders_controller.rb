@@ -26,17 +26,20 @@ class OrdersController < ApplicationController
   end
 
   def update
+
     address = Address.find_by(id: order_params[:address_id])
     request_objects = JSON.parse(order_params[:request_objects]) # request objects => [{item_id: ~, amount: ~, note: ~}, ...]
 
     order = Order.find_by(id: params[:id])
+    originalStatus, originalUser, originalAddress = order.status, order.user, order.address
     order.assign_attributes(status: order_params[:status], user: @current_user, address: address)
 
     if order.save
-      if !Request.make_requests(order, request_objects).any? { |r| r.nil? }
+      if !Request.update_requests(request_objects).any? { |r| !!r }
         render json: order
       else 
-        order.destroy
+        #  rollback update to original values
+        order.update(status: originalStatus, user: originalUser, address: originalAddress)
         render json: { error: "could not make requests" }, status: :not_acceptable
       end
     else 
