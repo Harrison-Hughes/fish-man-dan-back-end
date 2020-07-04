@@ -20,30 +20,38 @@ ActiveRecord::Schema.define(version: 202006061203812) do
     t.string "line_two"
     t.string "town_city"
     t.string "county"
+    t.string "postcode"
     t.string "contact_number"
     t.string "extra_info"
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
   create_table "items", force: :cascade do |t|
-    t.string "amount"
     t.string "name"
     t.string "description"
+    t.string "valid_until"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "orders", force: :cascade do |t|
     t.string "status"
-    t.string "reason_for_decline"
+    t.string "note_from_buyer"
+    t.string "note_from_seller"
     t.bigint "user_id", null: false
+    t.bigint "address_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "requests", force: :cascade do |t|
+    t.string "amount"
+    t.string "note"
     t.bigint "order_id", null: false
     t.bigint "item_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -56,10 +64,13 @@ ActiveRecord::Schema.define(version: 202006061203812) do
     t.string "email"
     t.string "full_name"
     t.string "password_digest"
+    t.boolean "is_admin"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "addresses", "users"
+  add_foreign_key "orders", "addresses"
   add_foreign_key "orders", "users"
   add_foreign_key "requests", "items"
   add_foreign_key "requests", "orders"
