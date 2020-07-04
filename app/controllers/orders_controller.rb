@@ -31,15 +31,15 @@ class OrdersController < ApplicationController
     request_objects = JSON.parse(order_params[:request_objects]) # request objects => [{item_id: ~, amount: ~, note: ~}, ...]
 
     order = Order.find_by(id: params[:id])
-    originalStatus, originalUser, originalAddress = order.status, order.user, order.address
-    order.assign_attributes(status: order_params[:status], user: @current_user, address: address)
+    originalStatus, originalUser, originalAddress, originalNoteFromBuyer, originalNoteFromSeller = order.status, order.user, order.address, order.note_from_buyer, order.note_from_seller
+    order.assign_attributes(status: order_params[:status], user: @current_user, address: address, note_from_buyer: order_params[:note_from_buyer], note_from_seller: order_params[:note_from_seller])
 
     if order.save
-      if !Request.update_requests(request_objects).any? { |r| !!r }
+      if !Request.update_requests(order, request_objects).any? { |r| r == 0 }
         render json: order
       else 
-        #  rollback update to original values
-        order.update(status: originalStatus, user: originalUser, address: originalAddress)
+        #  rollback requests to original values
+        order.update(status: originalStatus, user: originalUser, address: originalAddress, note_from_buyer: originalNoteFromBuyer, note_from_seller: originalNoteFromSeller)
         render json: { error: "could not make requests" }, status: :not_acceptable
       end
     else 
@@ -59,10 +59,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:request_objects, :address_id, :note_from_buyer, :status)
+    params.require(:order).permit(:request_objects, :address_id, :note_from_buyer, :note_from_seller, :status)
   end
 
-  def find_item_by_id(id)
-    return Item.find_by(id: id)
-  end
 end

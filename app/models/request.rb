@@ -7,26 +7,43 @@ class Request < ApplicationRecord
     return output
   end
 
-  def self.update_requests(request_objects)
-    return request_objects.map{ |r| update_request(r)}
+  def self.update_requests(order, request_objects)
+    return request_objects.map{ |r| update_request(order, r)}
   end
 
-  def update_request(request_object)
-    req = Request.find_by(id: request_object["item_id"].to_i)
+end
 
-    # delete request
-    if request_object["amount"] == "0"
-      if req.destroy
-        return true
-      else 
-        return false
-    end
+def update_request(order, request_object)
+  req = Request.find_by(order_id: order.id, item_id: request_object["item_id"].to_i)
 
-    # update request
-    if req.update(amount: request_object["amount"], note: request_object["note"])
-      return req
-    else 
-      return false
+  # create request 
+  if req.nil? && request_object["amount"] != "0"
+    if Request.create(order: order, item: Item.find_by(id: request_object["item_id"].to_i), amount: request_object["amount"], note: request_object["note"])
+      return 1
+    else
+      return 0
     end
   end
+
+  # if try to add object with no amount
+  if req.nil? && request_object["amount"] == "0"
+    return 1
+  end
+
+  # delete request
+  if !req.nil? && request_object["amount"] == "0"
+    if req.destroy
+      return 1
+    else return 0
+    end
+  end
+
+  # update request
+  if req.update(amount: request_object["amount"], note: request_object["note"])
+    return 1
+  else return 0
+  end
+
+  return 0
+
 end
