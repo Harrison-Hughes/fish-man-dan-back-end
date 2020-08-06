@@ -16,13 +16,13 @@ ActiveRecord::Schema.define(version: 202006061203812) do
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
+    t.string "recipient_name"
     t.string "line_one"
     t.string "line_two"
     t.string "town_city"
     t.string "county"
     t.string "postcode"
     t.string "contact_number"
-    t.string "extra_info"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -31,8 +31,16 @@ ActiveRecord::Schema.define(version: 202006061203812) do
 
   create_table "items", force: :cascade do |t|
     t.string "name"
-    t.string "description"
     t.string "valid_until"
+    t.string "size"
+    t.boolean "custom_amount"
+    t.string "fresh"
+    t.boolean "is_frozen"
+    t.boolean "price_by_each"
+    t.string "price_per"
+    t.string "min"
+    t.string "max"
+    t.string "grade"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -51,7 +59,6 @@ ActiveRecord::Schema.define(version: 202006061203812) do
 
   create_table "requests", force: :cascade do |t|
     t.string "amount"
-    t.string "note"
     t.bigint "order_id", null: false
     t.bigint "item_id", null: false
     t.datetime "created_at", precision: 6, null: false

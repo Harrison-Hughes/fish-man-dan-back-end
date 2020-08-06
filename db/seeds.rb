@@ -6,10 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# {name: '', size: '', fresh: '', is_frozen: , price_by_each: , custom_amount: , price_per: '', min: "", max: "",  grade: '' }
+
 items = Item.create([
-  {name: 'scallops', description: 'Scallop is a common name that is primarily applied to any one of numerous species of saltwater clams or marine bivalve mollusks in the taxonomic family Pectinidae, the scallops'},
-  {name: 'john dory', description: "John Dory, St Pierre or Peter's Fish, refers to fish of the genus Zeus, especially Zeus faber, of widespread distribution."},
-  {name: 'dover sole', description: "The common sole, Dover sole, or black sole is a species of flatfish in the family Soleidae."}  
+  {name: 'Shetland Cod portions', size: '140g - 170g', fresh: 'fresh', is_frozen: false, price_by_each: true, price_per: '3.50', min: "1", max: "100",  grade: 'Superior' },
+  {name: 'Shetland Cod whole side', size: '1.2kg - 1.5kg', fresh: 'fresh', is_frozen: false, price_by_each: false, price_per: '15.95', min: "1", max: "100",  grade: 'Superior' },
+  {name: 'Shetland Salmon', size: '140g - 170g', fresh: 'fresh', is_frozen: false, price_by_each: true, price_per: '3.00', min: "1", max: "100",  grade: 'Superior' },
+  {name: 'Cod, bacon and brie fishcakes', size: '115g', fresh: '', is_frozen: true, price_by_each: true , price_per: '1.50', min: "1", max: "100",  grade: '' },
+  {name: 'Farmed bass', size: '400g - 600g', fresh: 'fresh', is_frozen: false, price_by_each: true, price_per: '5.00', min: "1", max: "100",  grade: 'Farmed in greece' },
+  {name: 'Brixham monkfish fillet skinless and boneless', size: 'Cut to any', fresh: 'fresh', is_frozen: false, price_by_each: false, custom_amount: true, price_per: '19.95', min: "1", max: "100",  grade: 'superior' },
+  {name: 'Sashimi grade yellow fin tuna', size: 'Cut to any', fresh: 'fresh', is_frozen: false, price_by_each: false, custom_amount: true, price_per: '22.5', min: "", max: "",  grade: 'superior' }
 ])
 
 users = User.create([
@@ -18,8 +24,8 @@ users = User.create([
 ])
 
 addresses = Address.create([
-  {line_one: "6 Mayflower Close", line_two: "", town_city: "Lymington", county: "Hampshire", postcode: "SO41 3SN", contact_number: "01590670311", extra_info: "", user: users[0]}, 
-  {line_one: "7 Mayflower Close", line_two: "", town_city: "Lymington", county: "Hampshire", postcode: "SO41 3SN", contact_number: "07794341674", extra_info: "", user: users[1]}
+  {recipient_name: "HHA", line_one: "6 Mayflower Close", line_two: "", town_city: "Lymington", county: "Hampshire", postcode: "SO41 3SN", contact_number: "01590670311", user: users[0]}, 
+  {recipient_name: "Harr", line_one: "7 Mayflower Close", line_two: "", town_city: "Lymington", county: "Hampshire", postcode: "SO41 3SN", contact_number: "07794341674", user: users[1]}
 ])
-# address2 = Address.create({line_one: "7 Mayflower Close", line_two: "", town_city: "Lymington", county: "Hampshire", postcode: "SO41 3SN", contact_number: "07794341674", extra_info: "", user: users[1]})
+# address = Address.create({recipient_name: "", line_one: "7 Mayflower Close", line_two: "", town_city: "Lymington", county: "Hampshire", postcode: "SO41 3SN", contact_number: "07794341674", user: users[1]})
 
