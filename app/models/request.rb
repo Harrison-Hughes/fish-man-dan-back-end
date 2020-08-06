@@ -2,8 +2,8 @@ class Request < ApplicationRecord
   belongs_to :item
   belongs_to :order
 
-  def self.make_requests(order, request_objects) # request objects => [{item_id: ~, amount: ~, note: ~}, ...]
-    output = request_objects.map{ |r| Request.create(order: order, item: Item.find_by(id: r["item_id"].to_i), amount: r["amount"], note: r["note"])}
+  def self.make_requests(order, request_objects) # request objects => [{item_id: ~, amount: ~}, ...]
+    output = request_objects.map{ |r| Request.create(order: order, item: Item.find_by(id: r["item_id"].to_i), amount: r["amount"])}
     return output
   end
 
@@ -18,7 +18,7 @@ def update_request(order, request_object)
 
   # create request 
   if req.nil? && request_object["amount"] != "0"
-    if Request.create(order: order, item: Item.find_by(id: request_object["item_id"].to_i), amount: request_object["amount"], note: request_object["note"])
+    if Request.create(order: order, item: Item.find_by(id: request_object["item_id"].to_i), amount: request_object["amount"])
       return 1
     else
       return 0
@@ -39,7 +39,7 @@ def update_request(order, request_object)
   end
 
   # update request
-  if req.update(amount: request_object["amount"], note: request_object["note"])
+  if req.update(amount: request_object["amount"])
     return 1
   else return 0
   end
